@@ -38,6 +38,7 @@ private enum DesktopApp: String, CaseIterable, Identifiable {
 struct DesktopView: View {
     @State private var startMenuVisible = false
     @State private var selectedApp: DesktopApp?
+    @State private var searchText = ""
     @State private var showFileImporter = false
     @State private var selectedFileName: String?
     @State private var fileMessage: String?
@@ -90,18 +91,36 @@ struct DesktopView: View {
 
                 if startMenuVisible {
                     VStack(spacing: 16) {
-                        HStack {
+                        HStack(spacing: 10) {
                             Image(systemName: "magnifyingglass")
-                            Text("Search apps and features")
-                            Spacer()
+                            TextField("Search apps and features", text: $searchText)
+                                .textInputAutocapitalization(.never)
+                                .autocorrectionDisabled()
+                                .accessibilityLabel("Search apps and features")
+                            if !searchText.isEmpty {
+                                Button { searchText = "" } label: {
+                                    Image(systemName: "xmark.circle.fill")
+                                }
+                                .buttonStyle(.plain)
+                                .accessibilityLabel("Clear search")
+                            }
                         }
                         .foregroundStyle(NEXAStyle.muted)
                         .padding(12)
                         .background(.white.opacity(0.06), in: RoundedRectangle(cornerRadius: 12))
 
-                        Text("Pinned").font(.headline).frame(maxWidth: .infinity, alignment: .leading)
+                        Text(searchText.isEmpty ? "Pinned" : "Search results")
+                            .font(.headline).frame(maxWidth: .infinity, alignment: .leading)
+                        let matchingApps = DesktopApp.allCases.filter { searchText.isEmpty || $0.rawValue.localizedCaseInsensitiveContains(searchText) }
+                        if matchingApps.isEmpty {
+                            Text("No matching apps. Try About, Files, or Game Library.")
+                                .font(.caption)
+                                .foregroundStyle(NEXAStyle.muted)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.vertical, 8)
+                        }
                         HStack(spacing: 8) {
-                            ForEach(DesktopApp.allCases) { app in
+                            ForEach(matchingApps) { app in
                                 Button {
                                     selectedApp = app
                                     startMenuVisible = false
@@ -156,8 +175,10 @@ struct DesktopView: View {
                                 .background(.white.opacity(0.06), in: RoundedRectangle(cornerRadius: 11))
                         }
                         Spacer()
-                        Text(Date.now, format: .dateTime.hour().minute())
-                            .font(.caption.monospacedDigit())
+                        TimelineView(.periodic(from: .now, by: 30)) { context in
+                            Text(context.date, format: .dateTime.hour().minute())
+                                .font(.caption.monospacedDigit())
+                        }
                     }
                     .padding(9)
                     .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 18))
