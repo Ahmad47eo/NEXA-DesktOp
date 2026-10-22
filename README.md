@@ -4,15 +4,15 @@ NEXA Desktop is an experimental project exploring a Windows 11-inspired desktop 
 
 ## Current status
 
-🚧 **UI starter created — game runtime not connected.** The repository now includes a browser-based interface preview and starter SwiftUI source files. This is not yet a complete Xcode project, installed iOS app, or working PC-game runtime. Portal 2 has not been tested in a NEXA build.
+🚧 **Native Xcode project added — build not yet verified.** The repository includes a browser-based interface preview, SwiftUI source, an Xcode project and shared scheme, plus a GitHub Actions workflow that attempts an unsigned iOS Simulator build. Portal 2 has not been tested in a NEXA build, and the game runtime is not connected.
 
 ## Try the interface preview
 
 Open [prototype/index.html](prototype/index.html) in a browser. Keep index.html, style.css, and app.js together in the prototype/ folder. The preview includes a desktop wallpaper, taskbar, Start menu, and example About, Files, and Game Library panels.
 
-## Native iOS starter
+## Native iOS project
 
-See the [ios/ folder](ios/README.md) for the SwiftUI starter files and setup notes. To build an iPhone app, create an iOS App project in Xcode and add the provided Swift files. An Xcode project, signing configuration, and compiled app are not included yet.
+Open [ios/NEXADesktop.xcodeproj](ios/NEXADesktop.xcodeproj) in Xcode on a Mac. See [ios/README.md](ios/README.md) for details. The GitHub Actions workflow in [.github/workflows/ios-build.yml](.github/workflows/ios-build.yml) runs a simulator build check on pushes and pull requests. A successful simulator build would not automatically produce an installable signed app for your iPhone.
 
 ## Goals
 
@@ -32,8 +32,8 @@ See the [ios/ folder](ios/README.md) for the SwiftUI starter files and setup not
 
 ## Planned milestones
 
-1. Build and review the desktop interface shell.
-2. Create and test a complete native iOS project.
+1. Validate the Xcode project with the simulator build workflow.
+2. Improve the native desktop interface.
 3. Evaluate runtime integration and device requirements.
 4. Add input handling and controller support.
 5. Test incrementally and publish reproducible results.
