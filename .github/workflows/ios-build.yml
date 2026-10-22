@@ -42,3 +42,33 @@ jobs:
           path: ${{ runner.temp }}/NEXA-DerivedData/Build/Products/Debug-iphonesimulator/NEXADesktop.app
           if-no-files-found: error
           retention-days: 7
+
+      - name: Build for physical iPhone (unsigned)
+        run: |
+          xcodebuild \
+            -project ios/NEXADesktop.xcodeproj \
+            -scheme NEXADesktop \
+            -sdk iphoneos \
+            -configuration Debug \
+            -derivedDataPath "$RUNNER_TEMP/NEXA-DeviceDerivedData" \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+
+      - name: Package unsigned iPhone IPA
+        run: |
+          APP_PATH="$RUNNER_TEMP/NEXA-DeviceDerivedData/Build/Products/Debug-iphoneos/NEXADesktop.app"
+          test -d "$APP_PATH"
+          mkdir -p "$RUNNER_TEMP/NEXA-IPA/Payload"
+          cp -R "$APP_PATH" "$RUNNER_TEMP/NEXA-IPA/Payload/NEXADesktop.app"
+          cd "$RUNNER_TEMP/NEXA-IPA"
+          /usr/bin/zip -qry "$RUNNER_TEMP/NEXADesktop-unsigned.ipa" Payload
+          test -s "$RUNNER_TEMP/NEXADesktop-unsigned.ipa"
+          ls -lh "$RUNNER_TEMP/NEXADesktop-unsigned.ipa"
+
+      - name: Upload unsigned iPhone IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: NEXADesktop-iPhone-unsigned-IPA
+          path: ${{ runner.temp }}/NEXADesktop-unsigned.ipa
+          if-no-files-found: error
+          retention-days: 7
