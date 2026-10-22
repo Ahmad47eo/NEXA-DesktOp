@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#101c35">
+  <title>NEXA Desktop — Interface Preview</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="desktop" aria-label="NEXA Desktop preview">
+    <div class="wallpaper-glow"></div>
+    <header class="desktop-label">
+      <div class="nexa-mark">N</div>
+      <div><strong>NEXA Desktop</strong><span>Interface preview · Runtime not connected</span></div>
+    </header>
+
+    <section class="desktop-icons" aria-label="Desktop apps">
+      <button class="desktop-icon" data-open="about"><span class="app-icon about-icon">N</span><span>About NEXA</span></button>
+      <button class="desktop-icon" data-open="files"><span class="app-icon files-icon">▰</span><span>Files</span></button>
+      <button class="desktop-icon" data-open="games"><span class="app-icon games-icon">▶</span><span>Game Library</span></button>
+    </section>
+
+    <section class="window hidden" id="app-window" aria-live="polite">
+      <div class="window-titlebar"><span id="window-symbol">✦</span><strong id="window-title">Welcome</strong><button id="close-window" aria-label="Close window">×</button></div>
+      <div class="window-content" id="window-content"></div>
+    </section>
+
+    <section class="start-menu hidden" id="start-menu">
+      <div class="start-search">⌕ <span>Search apps and features</span></div>
+      <p class="section-heading">Pinned</p>
+      <div class="pinned-grid">
+        <button data-open="about"><span class="app-icon about-icon">N</span>About NEXA</button>
+        <button data-open="files"><span class="app-icon files-icon">▰</span>Files</button>
+        <button data-open="games"><span class="app-icon games-icon">▶</span>Game Library</button>
+      </div>
+      <p class="start-note">Prototype only — no game runtime installed.</p>
+    </section>
+
+    <footer class="taskbar">
+      <button class="taskbar-button start-button" id="start-button" aria-label="Open Start menu"><span class="nexa-mark small">N</span></button>
+      <button class="taskbar-button search-button" id="search-button">⌕ <span>Search</span></button>
+      <div class="taskbar-spacer"></div>
+      <div class="tray"><span>◖</span><span id="clock">--:--</span></div>
+    </footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
