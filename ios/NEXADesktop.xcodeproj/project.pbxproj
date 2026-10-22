@@ -35,7 +35,6 @@
         A20000000000000000000001 /* NEXADesktopApp.swift */,
         A20000000000000000000002 /* DesktopView.swift */,
       );
-      path = "..";
       sourceTree = "<group>";
     };
     A40000000000000000000003 /* Products */ = {
