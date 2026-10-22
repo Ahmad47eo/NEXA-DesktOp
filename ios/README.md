@@ -1,10 +1,14 @@
-# Native iOS starter
+# Native iOS project
 
-This folder contains the first SwiftUI shell for NEXA Desktop.
+This folder contains a starter SwiftUI shell and an Xcode project for NEXA Desktop.
 
 ## Open in Xcode
 
-Create a new **iOS App** project in Xcode named `NEXADesktop`, using SwiftUI, then replace its generated app entry point and root view with the files in this folder. This repository currently does **not** include an Xcode project file, signing configuration, or a compiled app.
+On a Mac with Xcode installed, open `NEXADesktop.xcodeproj` and select the `NEXADesktop` scheme. Choose an iOS Simulator destination and build. To install on a physical iPhone, configure your own Apple signing team and provisioning in Xcode. No signing credentials are stored in this repository.
+
+## Build validation
+
+The repository's GitHub Actions workflow attempts an unsigned simulator build on macOS. Check the Actions tab for the actual result; the project has not been locally built or independently verified from this chat.
 
 ## Current scope
 
