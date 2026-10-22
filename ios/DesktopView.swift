@@ -41,6 +41,7 @@ struct DesktopView: View {
     @State private var showFileImporter = false
     @State private var selectedFileName: String?
     @State private var fileMessage: String?
+    @State private var filePreview: String?
 
     var body: some View {
         GeometryReader { geometry in
@@ -174,8 +175,33 @@ struct DesktopView: View {
         .fileImporter(isPresented: $showFileImporter, allowedContentTypes: [.item], allowsMultipleSelection: false) { result in
             switch result {
             case .success(let urls):
-                selectedFileName = urls.first?.lastPathComponent
-                fileMessage = selectedFileName.map { "Selected: \($0)" } ?? "No file selected."
+                guard let url = urls.first else {
+                    selectedFileName = nil
+                    fileMessage = "No file selected."
+                    filePreview = nil
+                    return
+                }
+                selectedFileName = url.lastPathComponent
+                filePreview = nil
+                let hasAccess = url.startAccessingSecurityScopedResource()
+                defer { if hasAccess { url.stopAccessingSecurityScopedResource() } }
+                do {
+                    let attributes = try FileManager.default.attributesOfItem(atPath: url.path)
+                    let fileSize = (attributes[.size] as? NSNumber)?.intValue ?? 0
+                    guard fileSize <= 256_000 else {
+                        fileMessage = "Selected: \(url.lastPathComponent) · Preview limited to files under 256 KB."
+                        return
+                    }
+                    let data = try Data(contentsOf: url)
+                    if let text = String(data: data, encoding: .utf8) {
+                        filePreview = String(text.prefix(6000))
+                        fileMessage = "Text preview loaded · \(fileSize) bytes"
+                    } else {
+                        fileMessage = "Selected: \(url.lastPathComponent) · This file is not UTF-8 text, so no text preview is available."
+                    }
+                } catch {
+                    fileMessage = "Selected: \(url.lastPathComponent) · Could not read preview: \(error.localizedDescription)"
+                }
             case .failure(let error):
                 fileMessage = "Could not open file: \(error.localizedDescription)"
             }
@@ -260,6 +286,47 @@ struct DesktopView: View {
                         .foregroundStyle(NEXAStyle.muted)
                         .fixedSize(horizontal: false, vertical: true)
                 }
+                if let filePreview {
+                    ScrollView {
+                        Text(filePreview.isEmpty ? "(Empty text file)" : filePreview)
+                            .font(.system(.caption, design: .monospaced))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .textSelection(.enabled)
+                            .padding(10)
+                    }
+                    .frame(maxHeight: 180)
+                    .background(.black.opacity(0.22), in: RoundedRectangle(cornerRadius: 10))
+                }
+            }
+
+            if app == .games {
+                VStack(alignment: .leading, spacing: 10) {
+                    HStack(spacing: 10) {
+                        Image(systemName: "gamecontroller.fill")
+                            .font(.title2)
+                            .foregroundStyle(.mint)
+                            .frame(width: 44, height: 44)
+                            .background(.white.opacity(0.08), in: RoundedRectangle(cornerRadius: 12))
+                        VStack(alignment: .leading, spacing: 3) {
+                            Text("Portal 2").font(.subheadline.weight(.semibold))
+                            Text("Not launchable yet").font(.caption).foregroundStyle(.orange)
+                        }
+                        Spacer()
+                    }
+                    Text("NEXA does not include the game or a Windows runtime. Madeira is a separate project that uses FEX, Wine, and graphics translation; integration and Portal 2 compatibility still need real engineering and testing.")
+                        .font(.caption)
+                        .foregroundStyle(NEXAStyle.muted)
+                        Link(destination: URL(string: "https://github.com/willfaust/Madeira")!) {
+                            Label("Review Madeira source", systemImage: "arrow.up.right.square")
+                                .font(.caption.weight(.semibold))
+                        }
+                    Link(destination: URL(string: "https://github.com/willfaust/Madeira/blob/main/docs/BUILDING.md")!) {
+                        Label("Read build requirements", systemImage: "doc.text")
+                            .font(.caption.weight(.semibold))
+                    }
+                }
+                .padding(12)
+                .background(.white.opacity(0.045), in: RoundedRectangle(cornerRadius: 12))
             }
 
             Text("EARLY PROTOTYPE")
