@@ -1,0 +1,162 @@
+// !$*UTF8*$!
+{
+  archiveVersion = 1;
+  classes = {};
+  objectVersion = 56;
+  objects = {
+
+/* Begin PBXBuildFile section */
+    A10000000000000000000001 /* NEXADesktopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000001 /* NEXADesktopApp.swift */; };
+    A10000000000000000000002 /* DesktopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000002 /* DesktopView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+    A20000000000000000000001 /* NEXADesktopApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NEXADesktopApp.swift; sourceTree = "<group>"; };
+    A20000000000000000000002 /* DesktopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesktopView.swift; sourceTree = "<group>"; };
+    A20000000000000000000003 /* NEXADesktop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NEXADesktop.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+    A30000000000000000000001 /* Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+    A40000000000000000000001 = {
+      isa = PBXGroup;
+      children = (
+        A40000000000000000000002 /* iOS Sources */,
+        A40000000000000000000003 /* Products */,
+      );
+      sourceTree = "<group>";
+    };
+    A40000000000000000000002 /* iOS Sources */ = {
+      isa = PBXGroup;
+      children = (
+        A20000000000000000000001 /* NEXADesktopApp.swift */,
+        A20000000000000000000002 /* DesktopView.swift */,
+      );
+      path = "..";
+      sourceTree = "<group>";
+    };
+    A40000000000000000000003 /* Products */ = {
+      isa = PBXGroup;
+      children = (A20000000000000000000003 /* NEXADesktop.app */,);
+      name = Products;
+      sourceTree = "<group>";
+    };
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+    A50000000000000000000001 /* NEXADesktop */ = {
+      isa = PBXNativeTarget;
+      buildConfigurationList = A60000000000000000000002 /* Build configuration list for PBXNativeTarget "NEXADesktop" */;
+      buildPhases = (
+        A30000000000000000000002 /* Sources */,
+        A30000000000000000000001 /* Frameworks */,
+        A30000000000000000000003 /* Resources */,
+      );
+      buildRules = ();
+      dependencies = ();
+      name = NEXADesktop;
+      productName = NEXADesktop;
+      productReference = A20000000000000000000003 /* NEXADesktop.app */;
+      productType = "com.apple.product-type.application";
+    };
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+    A70000000000000000000001 /* Project object */ = {
+      isa = PBXProject;
+      attributes = {
+        BuildIndependentTargetsInParallel = 1;
+        LastUpgradeCheck = 1600;
+        TargetAttributes = {
+          A50000000000000000000001 = {CreatedOnToolsVersion = 16.0;};
+        };
+      };
+      buildConfigurationList = A60000000000000000000001 /* Build configuration list for PBXProject "NEXADesktop" */;
+      compatibilityVersion = "Xcode 14.0";
+      developmentRegion = en;
+      hasScannedForEncodings = 0;
+      knownRegions = (en, Base);
+      mainGroup = A40000000000000000000001;
+      productRefGroup = A40000000000000000000003 /* Products */;
+      projectDirPath = "";
+      projectRoot = "";
+      targets = (A50000000000000000000001 /* NEXADesktop */,);
+    };
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+    A30000000000000000000003 /* Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+    A30000000000000000000002 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (
+      A10000000000000000000001 /* NEXADesktopApp.swift in Sources */,
+      A10000000000000000000002 /* DesktopView.swift in Sources */,
+    ); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+    A80000000000000000000001 /* Project Debug */ = {isa = XCBuildConfiguration; buildSettings = {
+      ALWAYS_SEARCH_USER_PATHS = NO;
+      CLANG_ENABLE_MODULES = YES;
+      IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+      SDKROOT = iphoneos;
+      SWIFT_VERSION = 5.0;
+      TARGETED_DEVICE_FAMILY = "1,2";
+    }; name = Debug; };
+    A80000000000000000000002 /* Project Release */ = {isa = XCBuildConfiguration; buildSettings = {
+      ALWAYS_SEARCH_USER_PATHS = NO;
+      CLANG_ENABLE_MODULES = YES;
+      IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+      SDKROOT = iphoneos;
+      SWIFT_VERSION = 5.0;
+      TARGETED_DEVICE_FAMILY = "1,2";
+    }; name = Release; };
+    A80000000000000000000003 /* Target Debug */ = {isa = XCBuildConfiguration; buildSettings = {
+      CODE_SIGN_STYLE = Automatic;
+      CURRENT_PROJECT_VERSION = 1;
+      GENERATE_INFOPLIST_FILE = YES;
+      INFOPLIST_KEY_CFBundleDisplayName = "NEXA Desktop";
+      INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+      INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+      INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+      INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+      INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+      IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+      LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/Frameworks",);
+      PRODUCT_BUNDLE_IDENTIFIER = org.ahmad47eo.NEXADesktop;
+      PRODUCT_NAME = "$(TARGET_NAME)";
+      SWIFT_EMIT_LOC_STRINGS = YES;
+      SWIFT_VERSION = 5.0;
+      TARGETED_DEVICE_FAMILY = "1,2";
+    }; name = Debug; };
+    A80000000000000000000004 /* Target Release */ = {isa = XCBuildConfiguration; buildSettings = {
+      CODE_SIGN_STYLE = Automatic;
+      CURRENT_PROJECT_VERSION = 1;
+      GENERATE_INFOPLIST_FILE = YES;
+      INFOPLIST_KEY_CFBundleDisplayName = "NEXA Desktop";
+      INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+      INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+      INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+      INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+      INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+      IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+      LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/Frameworks",);
+      PRODUCT_BUNDLE_IDENTIFIER = org.ahmad47eo.NEXADesktop;
+      PRODUCT_NAME = "$(TARGET_NAME)";
+      SWIFT_EMIT_LOC_STRINGS = YES;
+      SWIFT_VERSION = 5.0;
+      TARGETED_DEVICE_FAMILY = "1,2";
+    }; name = Release; };
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+    A60000000000000000000001 /* Build configuration list for PBXProject "NEXADesktop" */ = {isa = XCConfigurationList; buildConfigurations = (A80000000000000000000001 /* Project Debug */, A80000000000000000000002 /* Project Release */,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+    A60000000000000000000002 /* Build configuration list for PBXNativeTarget "NEXADesktop" */ = {isa = XCConfigurationList; buildConfigurations = (A80000000000000000000003 /* Target Debug */, A80000000000000000000004 /* Target Release */,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+/* End XCConfigurationList section */
+  };
+  rootObject = A70000000000000000000001 /* Project object */;
+}
