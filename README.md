@@ -1,46 +1,50 @@
 # NEXA Desktop
 
-NEXA Desktop is an experimental project exploring a Windows 11-inspired desktop experience on iPhone, with the long-term goal of launching compatible PC games such as Portal 2.
+NEXA Desktop is an experimental, Windows 11-inspired iPhone desktop shell. The long-term goal is to investigate whether compatible Windows PC games such as Portal 2 can be run through an integrated runtime.
 
 ## Current status
 
-🚧 **Native Xcode project added — build not yet verified.** The repository includes a browser-based interface preview, SwiftUI source, an Xcode project and shared scheme, plus a GitHub Actions workflow that attempts an unsigned iOS Simulator build. Portal 2 has not been tested in a NEXA build, and the game runtime is not connected.
+**Build status: green.** GitHub Actions has successfully built both the iOS Simulator app and an unsigned iPhone-device IPA. These are build artifacts, not a signed, ready-to-install app.
 
-## Try the interface preview
+The native SwiftUI interface currently includes:
+- Desktop-style wallpaper, app icons, taskbar clock, Start menu, and panels.
+- A native iOS Files picker.
+- A limited UTF-8 text preview for selected files smaller than 256 KB.
+- A Game Library panel that clearly marks Portal 2 as unavailable until a runtime is integrated.
 
-Open [prototype/index.html](prototype/index.html) in a browser. Keep index.html, style.css, and app.js together in the prototype/ folder. The preview includes a desktop wallpaper, taskbar, Start menu, and example About, Files, and Game Library panels.
+## Build artifacts
+
+Open the [latest iOS build workflow](https://github.com/Ahmad47eo/NEXA-DesktOp/actions/workflows/ios-build.yml). Select the newest successful run and download either:
+- `NEXADesktop-iPhone-unsigned-IPA` — device-targeted unsigned package for further signing work.
+- `NEXADesktop-iOS-Simulator` — simulator-only app bundle.
+
+The unsigned IPA is **not directly installable as-is**. It requires a signing step. No Apple signing credentials or provisioning profile are included in this repository.
+
+## Browser preview
+
+Open [prototype/index.html](prototype/index.html) in a browser. Keep `index.html`, `style.css`, and `app.js` together in `prototype/`.
 
 ## Native iOS project
 
-Open [ios/NEXADesktop.xcodeproj](ios/NEXADesktop.xcodeproj) in Xcode on a Mac. See [ios/README.md](ios/README.md) for details. The GitHub Actions workflow in [.github/workflows/ios-build.yml](.github/workflows/ios-build.yml) runs a simulator build check on pushes and pull requests. A successful simulator build would not automatically produce an installable signed app for your iPhone.
+Open [ios/NEXADesktop.xcodeproj](ios/NEXADesktop.xcodeproj) in Xcode on a Mac. See [ios/README.md](ios/README.md) for details. GitHub Actions builds the simulator target and an unsigned iPhone target on each push to `main`.
 
-## Goals
+## Runtime and Portal 2 status
 
-- Build a standalone iOS app with a desktop-inspired interface.
-- Investigate an on-device runtime path for compatible Windows games.
-- Explore open-source components such as [Madeira](https://github.com/willfaust/Madeira) where technically and legally appropriate.
-- Preserve upstream attribution and comply with every dependency's license.
-- Document device compatibility, setup, limitations, and testing honestly.
+**Portal 2 does not run in NEXA yet.** No Windows emulator/runtime, Wine/FEX/DXMT components, JIT bridge, controller/input pipeline, or game-launch integration is included. Madeira is a separate GPL-3.0-or-later project with a substantial build and dependency stack; its code and licenses must be reviewed before integration. Adding a link to Madeira is not integration, and compatibility with Portal 2 must not be assumed.
 
-## Important notes
+- [Madeira source](https://github.com/willfaust/Madeira)
+- [Madeira build documentation](https://github.com/willfaust/Madeira/blob/main/docs/BUILDING.md)
 
-- The interface prototype is not Windows and cannot run PC games.
-- Compatibility and performance will vary by device, iOS version, runtime, graphics translation, and game.
-- Just because a game runs in another project does not guarantee it will run here.
-- This project does not include game files. Use game files you are legally entitled to use.
-- JIT and installation methods may have platform-specific requirements.
+NEXA does not bundle copyrighted game files. Use only game files you are legally entitled to use.
 
 ## Planned milestones
 
-1. Validate the Xcode project with the simulator build workflow.
-2. Improve the native desktop interface.
-3. Evaluate runtime integration and device requirements.
-4. Add input handling and controller support.
-5. Test incrementally and publish reproducible results.
-
-## Contributions
-
-Before copying or modifying any upstream code, review its license and retain required copyright notices, license texts, and attributions. Keep upstream components and NEXA-specific code clearly documented.
+1. Keep simulator and unsigned device builds green.
+2. Complete file preview and desktop-shell interactions.
+3. Evaluate runtime architecture, iOS/JIT constraints, memory needs, graphics translation, and upstream licensing.
+4. Integrate only after the runtime can be built and linked reproducibly.
+5. Add game import, controller/input handling, and compatibility tests.
+6. Publish test results and clear device requirements.
 
 ## Disclaimer
 
