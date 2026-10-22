@@ -1,4 +1,5 @@
 import SwiftUI
+import UniformTypeIdentifiers
 
 private enum NEXAStyle {
     static let ink = Color(red: 0.035, green: 0.075, blue: 0.15)
@@ -37,6 +38,9 @@ private enum DesktopApp: String, CaseIterable, Identifiable {
 struct DesktopView: View {
     @State private var startMenuVisible = false
     @State private var selectedApp: DesktopApp?
+    @State private var showFileImporter = false
+    @State private var selectedFileName: String?
+    @State private var fileMessage: String?
 
     var body: some View {
         GeometryReader { geometry in
@@ -167,6 +171,15 @@ struct DesktopView: View {
         }
         .ignoresSafeArea()
         .preferredColorScheme(.dark)
+        .fileImporter(isPresented: $showFileImporter, allowedContentTypes: [.item], allowsMultipleSelection: false) { result in
+            switch result {
+            case .success(let urls):
+                selectedFileName = urls.first?.lastPathComponent
+                fileMessage = selectedFileName.map { "Selected: \\($0)" } ?? "No file selected."
+            case .failure(let error):
+                fileMessage = "Could not open file: \\(error.localizedDescription)"
+            }
+        }
     }
 
     private var wallpaper: some View {
@@ -229,6 +242,26 @@ struct DesktopView: View {
                 .font(.subheadline)
                 .foregroundStyle(NEXAStyle.muted)
                 .fixedSize(horizontal: false, vertical: true)
+
+            if app == .files {
+                Button {
+                    showFileImporter = true
+                } label: {
+                    Label("Choose a file…", systemImage: "doc.badge.plus")
+                        .font(.subheadline.weight(.semibold))
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 11)
+                        .background(NEXAStyle.blue.opacity(0.18), in: RoundedRectangle(cornerRadius: 11))
+                }
+                .buttonStyle(.plain)
+                if let fileMessage {
+                    Text(fileMessage)
+                        .font(.caption)
+                        .foregroundStyle(NEXAStyle.muted)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
+
             Text("EARLY PROTOTYPE")
                 .font(.caption2.weight(.bold))
                 .tracking(1)
