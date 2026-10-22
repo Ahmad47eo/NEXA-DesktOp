@@ -28,7 +28,7 @@ private enum DesktopApp: String, CaseIterable, Identifiable {
         case .about:
             return "NEXA Desktop is an experimental desktop-inspired interface for iPhone. Runtime support is not connected yet."
         case .files:
-            return "File access is not implemented. A future version should use Apple's document picker so you choose what the app can access."
+            return "Choose a file from the iPhone Files picker. NEXA currently displays the selected filename; it does not yet open or edit file contents."
         case .games:
             return "No games can be launched yet. Runtime compatibility, graphics translation, JIT requirements, and controls still need investigation."
         }
@@ -175,9 +175,9 @@ struct DesktopView: View {
             switch result {
             case .success(let urls):
                 selectedFileName = urls.first?.lastPathComponent
-                fileMessage = selectedFileName.map { "Selected: \\($0)" } ?? "No file selected."
+                fileMessage = selectedFileName.map { "Selected: \($0)" } ?? "No file selected."
             case .failure(let error):
-                fileMessage = "Could not open file: \\(error.localizedDescription)"
+                fileMessage = "Could not open file: \(error.localizedDescription)"
             }
         }
     }
